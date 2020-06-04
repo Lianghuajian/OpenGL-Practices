@@ -10,6 +10,7 @@
 // 下面两者顺序不能颠倒
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
+#include <vector>
 
 static void gl_setup();
 
@@ -22,7 +23,6 @@ static void key_callback(GLFWwindow* window, int key, int scancode, int action, 
 int main(int argc, const char * argv[]) {
     
     std::cout << "Hello, World!\n";
-    
     gl_setup();
     
     GLFWwindow *window = glfwCreateWindow(800, 600, "LearnOpenGL", NULL, NULL);
