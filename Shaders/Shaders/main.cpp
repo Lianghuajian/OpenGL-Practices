@@ -142,9 +142,9 @@ int main(int argc, const char * argv[]) {
     // 注意这里要替换成shader.fs和shader.vs绝对路径，而不是下面这个
     Shader shader = Shader("/Users/lianghuajian/Desktop/Mine/selflearning/iOSpractice/OpenGL/2.Draw a triangle/Draw a triangle/shader.fs", "/Users/lianghuajian/Desktop/Mine/selflearning/iOSpractice/OpenGL/2.Draw a triangle/Draw a triangle/shader.vs");
     float vertices[] = {
-        0.0,   0.5, 0.0, 1.0f, 0.0f, 0.0f,
-        -0.5, -0.5, 0.0, 0.0f, 1.0f, 0.0f,
-        0.5,  -0.5, 0.0, 0.0f, 0.0f, 1.0f
+        0.0,   0.5, 0.0,// 1.0f, 0.0f, 0.0f,
+        -0.5, -0.5, 0.0, //0.0f, 1.0f, 0.0f,
+        0.5,  -0.5, 0.0//, 0.0f, 0.0f, 1.0f
     };
     
     unsigned int VAO, VBO;
@@ -154,7 +154,7 @@ int main(int argc, const char * argv[]) {
     glad_glBindVertexArray(VAO);
     glad_glBindBuffer(GL_ARRAY_BUFFER, VBO);
     glad_glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
-    glad_glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(float), (void*)0);
+    glad_glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void*)0);
     glad_glEnableVertexAttribArray(0);
     glad_glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(float), (void*)(3 * sizeof(float)));
     glad_glEnableVertexAttribArray(1);
@@ -166,10 +166,11 @@ int main(int argc, const char * argv[]) {
         glad_glClear(GL_COLOR_BUFFER_BIT);
         
         shader.use();
-        
+        float timeValue = glfwGetTime();
+        shader.setFloat("xOffset", sin(timeValue) * 0.5);
 //        glad_glUseProgram(shaderProgram);
         
-//        float timeValue = glfwGetTime();
+        
 //        float greenValue = (sin(timeValue) / 2.0f) + 0.5f;
 //        float redValue = (sin(timeValue) / 2.0f) + 0.3f;
 //        int vertexColorLocation = glad_glGetUniformLocation(shader.ID, "ourColor");
